@@ -3,3 +3,6 @@ kind: Kustomization
 resources:
 - ../../base
 - namespace.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
