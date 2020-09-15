@@ -51,6 +51,6 @@ jobs:
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
         ./kustomize edit set namespace "$NAMESPACE"
-        ./kustomize edit set add configmap version-cm --from-literal=VERSION="$VERSION"
+        ./kustomize edit add configmap version-cm --from-literal=VERSION="$VERSION"
         ./kustomize edit set image REGISTRY/IMAGE:TAG="$REGISTRY/$PROJECT_ID/$IMAGE:$VERSION"
         ./kustomize build . | kubectl apply -f -
