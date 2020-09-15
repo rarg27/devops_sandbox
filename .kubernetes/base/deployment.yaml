@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: canary
+spec:
+  selector:
+    app: canary
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: canary
+spec:
+  selector:
+    matchLabels:
+      app: canary
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: canary
+    spec:
+      containers:
+      - name: canary
+        image: REGISTRY/IMAGE:TAG
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: default
+          containerPort: 8080
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: version-cm

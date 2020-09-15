@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: canary
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+spec:
+  tls:
+  - hosts:
+    - sandboxd.rarg.xyz
+    secretName: canary-tls
+  rules:
+  - host: sandboxd.rarg.xyz
+    http:
+      paths:
+      - backend:
+          serviceName: canary
+          servicePort: 80
