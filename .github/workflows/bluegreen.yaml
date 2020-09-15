@@ -40,6 +40,7 @@ jobs:
       run: |-
         gcloud --quiet auth configure-docker
         docker build -t "$REGISTRY/$PROJECT_ID/$IMAGE:$VERSION" .
+        docker push "$REGISTRY/$PROJECT_ID/$IMAGE:$VERSION"
 
     - name: Kubernetes deploy
       run: |-
