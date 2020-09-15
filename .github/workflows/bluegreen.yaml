@@ -52,5 +52,5 @@ jobs:
         chmod u+x ./kustomize
         ./kustomize edit set namespace "$NAMESPACE"
         ./kustomize edit set add configmap version-cm --from-literal=VERSION="$VERSION"
-        ./kustomize edit set image MUSEROOM_IMAGE:TAG="$REGISTRY/$PROJECT_ID/$IMAGE:$VERSION"
+        ./kustomize edit set image REGISTRY/IMAGE:TAG="$REGISTRY/$PROJECT_ID/$IMAGE:$VERSION"
         ./kustomize build . | kubectl apply -f -
